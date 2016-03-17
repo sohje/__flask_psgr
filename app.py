@@ -82,11 +82,11 @@ def change_profile():
     user_id = session_info['data']['session_data']['user_id']
     # todo: validate json body before exec
     # todo: patch/put (update/modify entries)
-    st = users.update().where(users.c.user_id == user_id).values(request.get_json())
+    st = users.update().where(users.c.user_id == user_id).values(data)
     try:
         g.db.execute(st)
     except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e), 'data': request.get_json()})
+        return jsonify({'status': 'error', 'message': str(e), 'data': data})
     return jsonify({'status': 'OK'})
 
 if __name__ == '__main__':
